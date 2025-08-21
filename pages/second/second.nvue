@@ -1,0 +1,204 @@
+<template>
+	<div>
+		<view class="container">
+			<view class="header">
+				<view class="button" @click="close">
+					<text class="button-text">关闭</text>
+				</view>
+				<view class="button" @click="refresh">
+					<text class="button-text">刷新</text>
+				</view>
+				<view class="button" @click="share">
+					<text class="button-text">分享</text>
+				</view>
+				<view class="button" @click="back">
+					<text class="button-text">返回</text>
+				</view>
+			</view>
+			<view class="webview-container">
+				<yz-webview class="webview" 
+				ref='yzwebview'
+				:url="webUrl"
+				@jsBridgeEvent="onJsBridgeEvent"
+				@webViewFinishLoad="onWebViewFinishLoad" 
+				@webViewStartLoad="onWebViewStartLoad"
+				@webViewLoadError="onWebViewLoadError" 
+				@nativeLogEvent="onNativeLogEvent"></yz-webview>
+			</view>
+		</view>
+
+	</div>
+</template>
+
+<script>
+	var yzModule = uni.requireNativePlugin("YouzanUniPlugin-YZUniModule")
+	export default {
+		data() {
+			return {
+				webUrl: '',
+			}
+		},
+		onLoad(options) {
+		    this.printLog('URL参数:'+options.webUrl); 
+		    if (options.webUrl) {
+		        this.webUrl = options.webUrl;
+		    }
+		},
+		methods: {
+			close() {
+				uni.navigateTo({
+					url: '/pages/index/index'
+				})
+			},
+			refresh() {
+				this.$refs.yzwebview.reload()
+			},
+			share() {
+				
+			},
+			back() {
+				// const currentUrl = this.$refs.yzwebview.currentUrl()
+				// const canGoBack = this.$refs.yzwebview.canGoBack()
+				// const SDKName = yzModule.getSDKName()
+				// const SDKEnabled = yzModule.getSDKEnabled()
+				// this.printLog(`click back, currentUrl:${currentUrl} canGoBack:${canGoBack} SDKName:${SDKName} SDKEnabled:${SDKEnabled}`)
+				this.$refs.yzwebview.canGoBack((ret) => {
+					if (ret) {
+						this.$refs.yzwebview.goBack()
+					} else {
+						uni.navigateTo({
+							url: '/pages/index/index'
+						})
+					}
+				})
+			},
+ 			onJsBridgeEvent: function(e) {
+				let eventName = e.detail.eventName
+				yzModule.toast && yzModule.toast(eventName)
+				this.printLog("[onJsBridgeEvent] eventName：" + eventName + "; params：" + JSON.stringify(e))
+				if (eventName === "getUserInfo") {
+					// 获取用户信息
+					this.printLog("用户没有登录，准备去登录～")
+					yzModule.login({
+							'user_id': '19988889999',
+							'avatar': 'https://super-app-01.oss-cn-north-2-gov-1.aliyuncs.com/1375082/2021-02-09 10:08:43 lFeW.jpg',
+							'extra': 'test',
+							'nick_name': 'testName',
+							'gender': 1,
+						},
+						(ret) => {
+							// 刷新webview
+							this.printLog("登录成功，准备刷新webview")
+							this.$refs.yzwebview.reload()
+						})
+				}
+				else if (eventName === "fileSelect") {
+					// 文件选择
+				} else if (eventName === "share") {
+					// 分享事件
+				} else if (eventName === "jsLoaded") {
+					// JS加载完成事件
+				} else if (eventName === "addToCart") {
+					// 添加到购物车事件 
+				} else if (eventName === "buyNow") {
+					// 立即购买事件
+				} else if (eventName === "wechatPay") {
+					// 微信支付事件
+				} else if (eventName === "checkout") {
+					// 购物车页面点击"结算"时回调
+				} else if (eventName === "paymentSuccess") {
+					// 支付成功回调
+				} else if (eventName === "redirectCheckout") {
+					// 跳转业务方购买结算
+				} else if (eventName === "logoutSuccess") {
+					// 注销账号成功 
+				} else if (eventName === "logoutFailed") {
+					// 注销账号失败
+				} else if (eventName === "authSuccess") {
+					// 认证成功
+				} else if (eventName === "authFailed") {
+					// 认证失败
+				} else if (eventName === "permissionDenied") {
+					// 合规授权弹窗，用户不同意回调 
+				}
+			},
+			onWebViewStartLoad: function(e) {
+				this.printLog("[onWebViewStartLoad] params：" + JSON.stringify(e.detail))
+			},
+			onWebViewFinishLoad: function(e) {
+				this.printLog("[onWebViewFinishLoad] params：" + JSON.stringify(e.detail))
+			},
+			onWebViewLoadError: function(e) {
+				this.printLog("[onWebViewLoadError] params：" + JSON.stringify(e.detail))
+			},
+			onNativeLogEvent: function(e) {
+				this.printLog("[onNativeLogEvent] params：" + JSON.stringify(e.detail))
+			},
+			printLog(log){
+				if (yzModule?.nativeLog) {
+					yzModule.nativeLog(log)
+				} else {
+					console.log(log)
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+	.container {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		background-color: #ffffff;
+	}
+
+	.webview-container {
+		flex: 1;
+		overflow: hidden;
+	}
+
+	.webview {
+		position: absolute;
+		/* 绝对定位 */
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-color: #ffffff;
+	}
+
+	.header {
+		height: 56px;
+		padding: 0 40rpx;
+		background-color: #ffffff;
+		border-top: 1rpx solid #eee;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: row; 
+	}
+
+	.button {
+		background-color: #ff6b00;
+		height: 30px;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+		border-radius: 10rpx;
+		min-width: 100rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.button-text {
+		color: #ffffff;
+		font-size: 24rpx;
+		line-height: 30px;
+		text-align: center;
+	}
+</style>
