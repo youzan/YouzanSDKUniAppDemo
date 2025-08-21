@@ -16,7 +16,8 @@
 				</view>
 			</view>
 			<view class="webview-container">
-				<yz-webview class="webview" 
+				<yz-webview
+				 class="webview" 
 				ref='yzwebview'
 				:url="webUrl"
 				@jsBridgeEvent="onJsBridgeEvent"
@@ -96,6 +97,8 @@
 					// 文件选择
 				} else if (eventName === "share") {
 					// 分享事件
+					yzModule.toast && yzModule.toast("点击了分享")
+					this.$refs.yzwebview.sharePage()
 				} else if (eventName === "jsLoaded") {
 					// JS加载完成事件
 				} else if (eventName === "addToCart") {
