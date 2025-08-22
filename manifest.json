@@ -2,8 +2,8 @@
     "name" : "YZUniappDemo",
     "appid" : "__UNI__E73A716",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -47,7 +47,22 @@
             /* SDK配置 */
             "sdkConfigs" : {}
         },
-        "nativePlugins" : {}
+        "nativePlugins" : {
+            "YouzanUniPlugin" : {
+                "__plugin_info__" : {
+                    "name" : "YouzanUniPlugin",
+                    "description" : "有赞SDK插件",
+                    "platforms" : "Android,iOS",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {}
+                }
+            }
+        }
     },
     /* 快应用特有相关 */
     "quickapp" : {},

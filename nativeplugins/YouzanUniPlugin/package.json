@@ -19,6 +19,32 @@
             "embedFrameworks": ["YZBaseSDK.framework","YZSDKCore.framework"],
             "integrateType": "framework",
             "deploymentTarget": "11.0"
-        }
+        },
+		"android": {
+		    "plugins": [{
+		        "type": "module",
+		        "name": "YouzanUniPlugin-YZUniModule",
+		        "class": "io.dcloud.uniplugin.YZModule"
+		    }, {
+		        "type": "component",
+				"name": "yz-webview",
+			    "class": "io.dcloud.uniplugin.YouzanBrowserComponent"
+		        
+		    }],
+			"permissions": [
+				"android.permission.INTERNET",
+				"android.permission.ACCESS_NETWORK_STATE",
+				"android.permission.WRITE_EXTERNAL_STORAGE",
+				"android.permission.ACCESS_GPS",
+				"android.permission.ACCESS_ASSISTED_GPS",
+				"android.permission.ACCESS_LOCATION",
+				"android.permission.ACCESS_FINE_LOCATION"
+			],
+			"dependencies": [
+				"com.google.code.gson:gson:2.10"
+			],
+			"integrateType": "aar",
+			"minSdkVersion": "21"
+		}
     }
 }

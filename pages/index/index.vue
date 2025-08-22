@@ -258,20 +258,12 @@
 				yzModule.setupSDK({
 					'client_id': '1c3691de6f9aebc0d4',
 					'app_key': '1fb468088b70452fb7b7aed37e6a903b',
-					'scheme': 'xxxx'
+					'scheme': 'xxxx',
+					"debug":true
 				}, (ret) => {
 					uni.showToast({
 						title: `初始化结果：${ret.success} message：${ret.message}`,
 						icon: "none"
-					})
-				})
-				
-				yzModule.setupSDK({
-					"client_id": "111231",
-					"app_key": "12312"
-				}, (res) =>  {
-					showToast({
-						message: "" + res.success
 					})
 				})
 			},

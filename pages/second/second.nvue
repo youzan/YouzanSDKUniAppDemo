@@ -1,6 +1,9 @@
 <template>
 	<div>
 		<view class="container">
+			<view class="title_bar">
+				<text class="title-text">  {{ title }}</text>
+			</view>
 			<view class="header">
 				<view class="button" @click="close">
 					<text class="button-text">关闭</text>
@@ -14,12 +17,22 @@
 				<view class="button" @click="back">
 					<text class="button-text">返回</text>
 				</view>
+				<view class="button" @click="back2">
+					<text class="button-text">返回-2</text>
+				</view>
+				<view class="button" @click="forward">
+					<text class="button-text">前进</text>
+				</view>
+				
+				
 			</view>
+		
 			<view class="webview-container">
 				<yz-webview
 				 class="webview" 
 				ref='yzwebview'
 				:url="webUrl"
+				@receivedTitle="onReceivedTitle"
 				@jsBridgeEvent="onJsBridgeEvent"
 				@webViewFinishLoad="onWebViewFinishLoad" 
 				@webViewStartLoad="onWebViewStartLoad"
@@ -37,6 +50,7 @@
 		data() {
 			return {
 				webUrl: '',
+				title: '',
 			}
 		},
 		onLoad(options) {
@@ -55,7 +69,11 @@
 				this.$refs.yzwebview.reload()
 			},
 			share() {
-				
+				this.printLog("[sharePage]" + this.$refs.yzwebview.currentUrl())
+				this.$refs.yzwebview.currentUrl((url) => {
+					this.printLog("[sharePage2]" + url)
+				})
+				this.$refs.yzwebview.sharePage()
 			},
 			back() {
 				// const currentUrl = this.$refs.yzwebview.currentUrl()
@@ -72,6 +90,14 @@
 						})
 					}
 				})
+			},
+			back2() {
+				this.$refs.yzwebview.gobackWithStep({step : 2}, (res) => {
+					yzModule.nativeLog("gobackWithStep result =  " + JSON.stringify(res))
+				})
+			},
+			forward() {
+				this.$refs.yzwebview.goForward()
 			},
  			onJsBridgeEvent: function(e) {
 				let eventName = e.detail.eventName
@@ -98,7 +124,7 @@
 				} else if (eventName === "share") {
 					// 分享事件
 					yzModule.toast && yzModule.toast("点击了分享")
-					this.$refs.yzwebview.sharePage()
+					
 				} else if (eventName === "jsLoaded") {
 					// JS加载完成事件
 				} else if (eventName === "addToCart") {
@@ -127,6 +153,10 @@
 			},
 			onWebViewStartLoad: function(e) {
 				this.printLog("[onWebViewStartLoad] params：" + JSON.stringify(e.detail))
+			},
+			onReceivedTitle: function(e) {
+				this.title = e.detail.title || ''
+				this.printLog("[onReceivedTitle] params：" + JSON.stringify(e.detail))
 			},
 			onWebViewFinishLoad: function(e) {
 				this.printLog("[onWebViewFinishLoad] params：" + JSON.stringify(e.detail))
@@ -175,6 +205,16 @@
 		background-color: #ffffff;
 	}
 
+	.title_bar {
+		height: 56px;
+		padding: 0 40rpx;
+		background-color: #ffffff;
+		border-top: 1rpx solid #eee;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: row; 
+	}
 	.header {
 		height: 56px;
 		padding: 0 40rpx;
@@ -200,6 +240,12 @@
 
 	.button-text {
 		color: #ffffff;
+		font-size: 24rpx;
+		line-height: 30px;
+		text-align: center;
+	}
+	.title-text {
+		color: #000000;
 		font-size: 24rpx;
 		line-height: 30px;
 		text-align: center;
