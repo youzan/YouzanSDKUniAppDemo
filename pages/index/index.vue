@@ -81,7 +81,7 @@
 				// 配置组数据源
 				configData: [
 					{
-						name: '手动初始化SDK',
+						name: '手动初始化SDK1',
 						type: 'initSDK',
 						scheme: ''
 					},
@@ -255,12 +255,14 @@
 			
 			// 初始化SDK
 			initSDK() {
-				yzModule.setupSDK({
+				const config = {
 					'client_id': '1c3691de6f9aebc0d4',
-					'app_key': '1fb468088b70452fb7b7aed37e6a903b',
+					'app_key': '82f6a3c99264402f9d57897ba4d4ca38',
 					'scheme': 'xxxx',
-					"debug":true
-				}, (ret) => {
+					"debug":false
+				}
+				yzModule.nativeLog("初始化配置:" + JSON.stringify(config))
+				yzModule.setupSDK(config, (ret) => {
 					uni.showToast({
 						title: `初始化结果：${ret.success} message：${ret.message}`,
 						icon: "none"
