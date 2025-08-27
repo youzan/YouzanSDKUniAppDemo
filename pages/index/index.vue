@@ -260,7 +260,7 @@
 			// 初始化SDK
 			initSDK() {
 				// app_key andoid 和 ios 是不一样的
-				const appkey = systemInfo.platform.toLowerCase() == "android" ?'76a4fbe055844b55be81114dddf6fd31': "xxx"
+				const appkey = systemInfo.platform.toLowerCase() == "android" ?'76a4fbe055844b55be81114dddf6fd31': "1fb468088b70452fb7b7aed37e6a903b"
 				const config = {
 					'client_id': '1c3691de6f9aebc0d4',
 					'app_key': appkey,
