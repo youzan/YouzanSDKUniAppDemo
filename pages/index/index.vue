@@ -46,16 +46,19 @@
 <script>
 	const systemInfo = uni.getSystemInfoSync();
 	var yzModule = uni.requireNativePlugin("YouzanUniPlugin-YZUniModule")
+	var globalEvent = uni.requireNativePlugin('globalEvent');
 	export default {
 		onLoad() {
 			// 页面加载时自动初始化SDK
 			this.initSDK()
-			
+			globalEvent.addEventListener('nativeLogEvent', function(e) {
+				// yzModule.toast && yzModule.toast(JSON.stringify(e) )
+			});
 		},
 		data() {
 			return {
 				title: '功能列表',
-				webUrl: 'https://shop41487273.m.youzan.com/wscshop/home/lUWblj8NNI',
+				webUrl: 'https://shop42618405.youzan.com/v2/showcase/homepage?alias=1wFFbZ6566',
 				// WebView组数据源
 				webviewData: [
 					{
@@ -250,7 +253,7 @@
 
 			// 复原页面
 			restorePage() {
-				this.webUrl = 'https://shop41487273.m.youzan.com/wscshop/home/lUWblj8NNI'
+				this.webUrl = 'https://shop42618405.youzan.com/v2/showcase/homepage?alias=1wFFbZ6566'
 				this.printLog('复原页面成功')
 			},
 			
@@ -262,7 +265,7 @@
 					'client_id': '1c3691de6f9aebc0d4',
 					'app_key': appkey,
 					'scheme': 'xxxx',
-					"debug":false
+					"debug": false
 				}
 				yzModule.nativeLog("初始化配置:" + JSON.stringify(config))
 				yzModule.setupSDK(config, (ret) => {
