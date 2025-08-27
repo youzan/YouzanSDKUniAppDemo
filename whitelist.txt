@@ -1,0 +1,1 @@
+nativeplugins/YouzanUniPlugin/ios/YZBaseSDK.framework/_CodeSignature/CodeResources
