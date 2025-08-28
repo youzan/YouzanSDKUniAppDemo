@@ -79,11 +79,6 @@
 				this.$refs.yzwebview.sharePage()
 			},
 			back() {
-				// const currentUrl = this.$refs.yzwebview.currentUrl()
-				// const canGoBack = this.$refs.yzwebview.canGoBack()
-				// const SDKName = yzModule.getSDKName()
-				// const SDKEnabled = yzModule.getSDKEnabled()
-				// this.printLog(`click back, currentUrl:${currentUrl} canGoBack:${canGoBack} SDKName:${SDKName} SDKEnabled:${SDKEnabled}`)
 				this.$refs.yzwebview.canGoBack((ret) => {
 					if (ret) {
 						this.$refs.yzwebview.goBack()
@@ -104,11 +99,9 @@
 			},
  			onJsBridgeEvent: function(e) {
 				let eventName = e.detail.eventName
-				yzModule.toast && yzModule.toast(eventName)
 				this.printLog("[onJsBridgeEvent] eventName：" + eventName + "; params：" + JSON.stringify(e))
 				if (eventName === "getUserInfo") {
-					// 获取用户信息
-					this.printLog("用户没有登录，准备去登录～")
+					this.printLog("获取用户信息")
 					yzModule.login({
 							'user_id': '19988889999',
 							'avatar': 'https://super-app-01.oss-cn-north-2-gov-1.aliyuncs.com/1375082/2021-02-09 10:08:43 lFeW.jpg',
@@ -117,41 +110,35 @@
 							'gender': 1,
 						},
 						(ret) => {
-							// 刷新webview
 							this.printLog("登录成功，准备刷新webview")
 							this.$refs.yzwebview.reload()
 						})
-				}
-				else if (eventName === "fileSelect") {
-					// 文件选择
-				} else if (eventName === "share") {
-					// 分享事件
-					yzModule.toast && yzModule.toast("点击了分享")
-					
+				} else if (eventName === "returnShareData") {
+					this.printLog("点击了分享")
 				} else if (eventName === "jsLoaded") {
-					// JS加载完成事件
+					this.printLog("JS加载完成事件")
 				} else if (eventName === "addToCart") {
-					// 添加到购物车事件 
+					this.printLog("添加到购物车事件")
 				} else if (eventName === "buyNow") {
-					// 立即购买事件
-				} else if (eventName === "wechatPay") {
-					// 微信支付事件
-				} else if (eventName === "checkout") {
-					// 购物车页面点击"结算"时回调
-				} else if (eventName === "paymentSuccess") {
-					// 支付成功回调
-				} else if (eventName === "redirectCheckout") {
-					// 跳转业务方购买结算
-				} else if (eventName === "logoutSuccess") {
-					// 注销账号成功 
-				} else if (eventName === "logoutFailed") {
-					// 注销账号失败
-				} else if (eventName === "authSuccess") {
-					// 认证成功
-				} else if (eventName === "authFailed") {
-					// 认证失败
-				} else if (eventName === "permissionDenied") {
-					// 合规授权弹窗，用户不同意回调 
+					this.printLog("立即购买事件")
+				} else if (eventName === "wxPay") {
+					this.printLog("微信支付事件")
+				} else if (eventName === "addUp") {
+					this.printLog("购物车页面点击结算")
+				} else if (eventName === "paymentFinished") {
+					this.printLog("支付成功回调")
+				} else if (eventName === "GoCashier") {
+					this.printLog("跳转业务方购买结算")
+				} else if (eventName === "AccountCancelSuccess") {
+					this.printLog("注销账号成功 ")
+				} else if (eventName === "AccountCancelFailed") {
+					this.printLog("注销账号失败")
+				} else if (eventName === "authorizationSuccess") {
+					this.printLog("认证成功")
+				} else if (eventName === "authorizationError") {
+					this.printLog("认证失败")
+				} else if (eventName === "invokeDisagreeProtocol") {
+					this.printLog("合规授权弹窗，用户不同意回调 ")
 				}
 			},
 			onWebViewStartLoad: function(e) {
