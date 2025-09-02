@@ -52,7 +52,7 @@
 			// 页面加载时自动初始化SDK
 			this.initSDK()
 			globalEvent.addEventListener('nativeLogEvent', function(e) {
-				// yzModule.toast && yzModule.toast(JSON.stringify(e) )
+				this.printLog(JSON.stringify(e))
 			});
 		},
 		data() {
@@ -125,8 +125,7 @@
 		methods: {
 			// 处理列表项点击
 			handleItemClick(item) {
-				this.printLog('点击项目:', item)
-				
+				this.printLog('点击:'+item.name)
 				switch(item.type) {
 					case 'initSDK':
 						this.initSDK()
@@ -210,43 +209,8 @@
 							this.printLog('跳转成功')
 						},
 						fail: (err) => {
-							this.printLog('跳转失败', err)
-							uni.showToast({
-								title: '跳转失败',
-								icon: 'none'
-							})
+							this.printLog('跳转失败')
 						}
-					})
-				}
-			},
-			
-			// 处理scheme跳转
-			handleScheme(scheme) {
-				if (!scheme) {
-					uni.showToast({
-						title: 'scheme为空',
-						icon: 'none'
-					})
-					return
-				}
-				
-				// 判断是否为外部链接
-				if (scheme.startsWith('http://') || scheme.startsWith('https://')) {
-					// 打开外部链接
-					uni.navigateTo({
-						url: `/pages/webview/webview?url=${encodeURIComponent(scheme)}`,
-						fail: () => {
-							// 如果没有webview页面，尝试使用系统浏览器打开
-							plus.runtime.openURL(scheme)
-						}
-					})
-				} else {
-					// 处理自定义scheme
-					plus.runtime.openURL(scheme, (err) => {
-						uni.showToast({
-							title: '打开失败',
-							icon: 'none'
-						})
 					})
 				}
 			},
@@ -259,15 +223,16 @@
 			
 			// 初始化SDK
 			initSDK() {
-				// app_key andoid 和 ios 是不一样的
-				const appkey = systemInfo.platform.toLowerCase() == "android" ?'76a4fbe055844b55be81114dddf6fd31': "xxx"
+				const appkey = systemInfo.platform.toLowerCase() == "android" ?'76a4fbe055844b55be81114dddf6fd31': "1fb468088b70452fb7b7aed37e6a903b"
 				const config = {
 					'client_id': '1c3691de6f9aebc0d4',
 					'app_key': appkey,
 					'scheme': 'xxxx',
 					"debug": false
 				}
-				yzModule.nativeLog("初始化配置:" + JSON.stringify(config))
+				
+				this.printLog("初始化配置:" + JSON.stringify(config))
+				
 				yzModule.setupSDK(config, (ret) => {
 					uni.showToast({
 						title: `初始化结果：${ret.success} message：${ret.message}`,
