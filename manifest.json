@@ -45,7 +45,12 @@
             },
             /* ios打包配置 */
             "ios" : {
-                "dSYMs" : false
+                "dSYMs" : false,
+                "privacyDescription" : {
+                    "NSLocationWhenInUseUsageDescription" : "定位权限",
+                    "NSLocationAlwaysUsageDescription" : "定位权限",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "定位权限"
+                }
             },
             /* SDK配置 */
             "sdkConfigs" : {}
