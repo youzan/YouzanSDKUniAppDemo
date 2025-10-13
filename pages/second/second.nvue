@@ -55,7 +55,7 @@
 			}
 		},
 		onLoad(options) {
-		    this.printLog('URL参数:'+options.webUrl); 
+		    // this.printLog('URL参数:'+options.webUrl); 
 		    if (options.webUrl) {
 		        this.webUrl = options.webUrl;
 		    }
@@ -72,9 +72,9 @@
 				this.$refs.yzwebview.reload()
 			},
 			share() {
-				this.printLog("[sharePage]" + this.$refs.yzwebview.currentUrl())
+				// this.printLog("[sharePage]" + this.$refs.yzwebview.currentUrl())
 				this.$refs.yzwebview.currentUrl((url) => {
-					this.printLog("[sharePage2]" + url)
+					// this.printLog("[sharePage2]" + url)
 				})
 				this.$refs.yzwebview.sharePage()
 			},
@@ -99,70 +99,71 @@
 			},
  			onJsBridgeEvent: function(e) {
 				let eventName = e.detail.eventName
-				this.printLog("[onJsBridgeEvent] eventName：" + eventName + "; params：" + JSON.stringify(e))
+				// this.printLog("[onJsBridgeEvent] eventName：" + eventName + "; params：" + JSON.stringify(e))
 				if (eventName === "getUserInfo") {
-					this.printLog("获取用户信息")
-					yzModule.login({
-							'user_id': '19988889999',
-							'avatar': 'https://super-app-01.oss-cn-north-2-gov-1.aliyuncs.com/1375082/2021-02-09 10:08:43 lFeW.jpg',
-							'extra': 'test',
-							'nick_name': 'testName',
-							'gender': 1,
-						},
-						(ret) => {
-							this.printLog("登录成功，准备刷新webview")
-							this.$refs.yzwebview.reload()
-						})
+					// this.printLog("获取用户信息")
+					console.log("触发了登录")
+					// yzModule.login({
+					// 		'user_id': '19988889999',
+					// 		'avatar': 'https://super-app-01.oss-cn-north-2-gov-1.aliyuncs.com/1375082/2021-02-09 10:08:43 lFeW.jpg',
+					// 		'extra': 'test',
+					// 		'nick_name': 'testName',
+					// 		'gender': 1,
+					// 	},
+					// 	(ret) => {
+					// 		// this.printLog("登录成功，准备刷新webview")
+					// 		this.$refs.yzwebview.reload()
+					// 	})
 				} else if (eventName === "returnShareData") {
-					this.printLog("点击了分享")
+					// this.printLog("点击了分享")
 				} else if (eventName === "jsLoaded") {
-					this.printLog("JS加载完成事件")
+					// this.printLog("JS加载完成事件")
 				} else if (eventName === "addToCart") {
-					this.printLog("添加到购物车事件")
+					// this.printLog("添加到购物车事件")
 				} else if (eventName === "buyNow") {
-					this.printLog("立即购买事件")
+					// this.printLog("立即购买事件")
 				} else if (eventName === "wxPay") {
-					this.printLog("微信支付事件")
+					// this.printLog("微信支付事件")
 				} else if (eventName === "addUp") {
-					this.printLog("购物车页面点击结算")
+					// this.printLog("购物车页面点击结算")
 				} else if (eventName === "paymentFinished") {
-					this.printLog("支付成功回调")
+					// this.printLog("支付成功回调")
 				} else if (eventName === "GoCashier") {
-					this.printLog("跳转业务方购买结算")
+					// this.printLog("跳转业务方购买结算")
 				} else if (eventName === "AccountCancelSuccess") {
-					this.printLog("注销账号成功 ")
+					// this.printLog("注销账号成功 ")
 				} else if (eventName === "AccountCancelFailed") {
-					this.printLog("注销账号失败")
+					// this.printLog("注销账号失败")
 				} else if (eventName === "authorizationSuccess") {
-					this.printLog("认证成功")
+					// this.printLog("认证成功")
 				} else if (eventName === "authorizationError") {
-					this.printLog("认证失败")
+					// this.printLog("认证失败")
 				} else if (eventName === "invokeDisagreeProtocol") {
-					this.printLog("合规授权弹窗，用户不同意回调 ")
+					// this.printLog("合规授权弹窗，用户不同意回调 ")
 				}
 			},
 			onWebViewStartLoad: function(e) {
-				this.printLog("[onWebViewStartLoad] params：" + JSON.stringify(e.detail))
+				// this.printLog("[onWebViewStartLoad] params：" + JSON.stringify(e.detail))
 			},
 			onReceivedTitle: function(e) {
 				this.title = e.detail.title || ''
-				this.printLog("[onReceivedTitle] params：" + JSON.stringify(e.detail))
+				// this.printLog("[onReceivedTitle] params：" + JSON.stringify(e.detail))
 			},
 			onWebViewFinishLoad: function(e) {
-				this.printLog("[onWebViewFinishLoad] params：" + JSON.stringify(e.detail))
+				// this.printLog("[onWebViewFinishLoad] params：" + JSON.stringify(e.detail))
 			},
 			onWebViewLoadError: function(e) {
-				this.printLog("[onWebViewLoadError] params：" + JSON.stringify(e.detail))
+				// this.printLog("[onWebViewLoadError] params：" + JSON.stringify(e.detail))
 			},
 			onNativeLogEvent: function(e) {
 				this.printLog("[onNativeLogEvent] params：" + JSON.stringify(e.detail))
 			},
 			printLog(log){
-				if (yzModule?.nativeLog) {
-					yzModule.nativeLog(log)
-				} else {
-					console.log(log)
-				}
+				// if (yzModule?.nativeLog) {
+				// 	yzModule.nativeLog(log)
+				// } else {
+				// 	console.log(log)
+				// }
 			}
 		}
 	}

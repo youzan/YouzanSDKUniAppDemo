@@ -52,13 +52,15 @@
 			// 页面加载时自动初始化SDK
 			this.initSDK()
 			globalEvent.addEventListener('nativeLogEvent', function(e) {
-				this.printLog(JSON.stringify(e))
+				console.log("nativeLogEvent", e)
 			});
 		},
 		data() {
 			return {
 				title: '功能列表',
-				webUrl: 'https://shop42618405.youzan.com/v2/showcase/homepage?alias=1wFFbZ6566',
+				webUrl: 'https://shop96995477.m.youzan.com/v2/showcase/homepage?alias=LEDIZ83efK',
+				// webUrl: 'https://shop42618405.youzan.com/v2/showcase/homepage?alias=1wFFbZ6566',
+			//‘1', // ,
 				// WebView组数据源
 				webviewData: [
 					{
@@ -125,7 +127,7 @@
 		methods: {
 			// 处理列表项点击
 			handleItemClick(item) {
-				this.printLog('点击:'+item.name)
+				// this.printLog('点击:'+item.name)
 				switch(item.type) {
 					case 'initSDK':
 						this.initSDK()
@@ -191,10 +193,10 @@
 							uni.navigateTo({
 								url: url + '?webUrl=' + this.webUrl,
 								success: () => {
-									this.printLog('跳转成功')
+									// this.printLog('跳转成功')
 								},
 								fail: (err) => {
-									this.printLog('跳转失败')
+									// this.printLog('跳转失败')
 									uni.showToast({
 										title: '跳转失败',
 										icon: 'none'
@@ -206,10 +208,10 @@
 					uni.navigateTo({
 						url: url + '?webUrl=' + this.webUrl,
 						success: () => {
-							this.printLog('跳转成功')
+							// this.printLog('跳转成功')
 						},
 						fail: (err) => {
-							this.printLog('跳转失败')
+							// this.printLog('跳转失败')
 						}
 					})
 				}
@@ -218,20 +220,20 @@
 			// 复原页面
 			restorePage() {
 				this.webUrl = 'https://shop42618405.youzan.com/v2/showcase/homepage?alias=1wFFbZ6566'
-				this.printLog('复原页面成功')
+				// this.printLog('复原页面成功')
 			},
 			
 			// 初始化SDK
 			initSDK() {
 				const appkey = systemInfo.platform.toLowerCase() == "android" ?'76a4fbe055844b55be81114dddf6fd31': "1fb468088b70452fb7b7aed37e6a903b"
 				const config = {
-					'client_id': '1c3691de6f9aebc0d4',
+					'client_id': '1dab0042a6c6879f45', //1c3691de6f9aebc0d4',
 					'app_key': appkey,
 					'scheme': 'xxxx',
-					"debug": false
+					"debug": true
 				}
 				
-				this.printLog("初始化配置:" + JSON.stringify(config))
+				// this.printLog("初始化配置:" + JSON.stringify(config))
 				
 				yzModule.setupSDK(config, (ret) => {
 					uni.showToast({
@@ -252,14 +254,14 @@
 					},
 					(ret) => {
 						// 刷新webview
-						this.printLog('登录成功')
+						// this.printLog('登录成功')
 					})
 			},
 
 			// 退出登录
 			logout() {
 				yzModule.logout((ret) => {
-					this.printLog('退出登录成功')
+					// this.printLog('退出登录成功')
 				})
 			},
 			
