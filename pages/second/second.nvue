@@ -38,7 +38,7 @@
 				@webViewFinishLoad="onWebViewFinishLoad" 
 				@webViewStartLoad="onWebViewStartLoad"
 				@webViewLoadError="onWebViewLoadError" 
-				webViewInterceptRequest="onWebViewInterceptRequest" 
+				@webViewInterceptRequest="onWebViewInterceptRequest" 
 				@nativeLogEvent="onNativeLogEvent"></yz-webview>
 			</view>
 		</view>
