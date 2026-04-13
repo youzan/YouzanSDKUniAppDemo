@@ -32,6 +32,7 @@
 				 class="webview" 
 				ref='yzwebview'
 				:url="webUrl"
+				disableLoading=true
 				@receivedTitle="onReceivedTitle"
 				@jsBridgeEvent="onJsBridgeEvent"
 				@webViewFinishLoad="onWebViewFinishLoad" 
@@ -71,7 +72,6 @@
 			},
 			refresh() {
 				this.$refs.yzwebview.reload()
-				this.$refs.yzwebview.setDisableLoading(true)
 				var params = [
 					{
 						"url" : "https://shop98160372.youzan.com/v2/showcase/goods?alias=3nfqobux9epb0u2&banner_id=f.182683213~image_ad.4~1~2lDUDROC",
