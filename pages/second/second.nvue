@@ -171,6 +171,10 @@
 			},
 			onWebViewInterceptRequest: function(e) {
 				this.printLog("[onWebViewInterceptRequest] url：" + e.url)
+				uni.showToast({
+					title: '拦截了',
+					icon: 'none'
+				})
 			},
 			onNativeLogEvent: function(e) {
 				this.printLog("[onNativeLogEvent] params：" + JSON.stringify(e.detail))
