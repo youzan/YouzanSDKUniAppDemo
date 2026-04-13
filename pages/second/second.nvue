@@ -37,6 +37,7 @@
 				@webViewFinishLoad="onWebViewFinishLoad" 
 				@webViewStartLoad="onWebViewStartLoad"
 				@webViewLoadError="onWebViewLoadError" 
+				webViewInterceptRequest="onWebViewInterceptRequest" 
 				@nativeLogEvent="onNativeLogEvent"></yz-webview>
 			</view>
 		</view>
@@ -70,6 +71,18 @@
 			},
 			refresh() {
 				this.$refs.yzwebview.reload()
+				this.$refs.yzwebview.setDisableLoading(true)
+				var params = [
+					{
+						"url" : "https://shop98160372.youzan.com/v2/showcase/goods?alias=3nfqobux9epb0u2&banner_id=f.182683213~image_ad.4~1~2lDUDROC",
+						"type" : 1
+					},
+					{
+						"url" : "https://h5.youzan.com/wscshop/showcase/homepage?kdt_id=97968204",
+						"type" : 0
+					}
+				]
+				this.$refs.yzwebview.setNavigationInterceptionRules(params)
 			},
 			share() {
 				// this.printLog("[sharePage]" + this.$refs.yzwebview.currentUrl())
@@ -77,6 +90,7 @@
 					// this.printLog("[sharePage2]" + url)
 				})
 				this.$refs.yzwebview.sharePage()
+				
 			},
 			back() {
 				this.$refs.yzwebview.canGoBack((ret) => {
@@ -154,6 +168,9 @@
 			},
 			onWebViewLoadError: function(e) {
 				// this.printLog("[onWebViewLoadError] params：" + JSON.stringify(e.detail))
+			},
+			onWebViewInterceptRequest: function(e) {
+				this.printLog("[onWebViewInterceptRequest] url：" + e.url)
 			},
 			onNativeLogEvent: function(e) {
 				this.printLog("[onNativeLogEvent] params：" + JSON.stringify(e.detail))

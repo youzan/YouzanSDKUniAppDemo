@@ -21,5 +21,6 @@ FOUNDATION_EXPORT const unsigned char YZBaseSDKVersionString[];
 #import <YZBaseSDK/YZWebView.h>
 #import <YZBaseSDK/YZNotice.h>
 #import <YZBaseSDK/YZWebViewProtocol.h>
+#import <YZBaseSDK/YZInterceptionRule.h>
 #import <YZBaseSDK/YZIMWebViewController.h>
 

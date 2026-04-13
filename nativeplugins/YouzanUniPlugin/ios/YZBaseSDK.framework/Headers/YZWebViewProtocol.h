@@ -17,10 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol YZWebView;
 
+@class YZInterceptionRule;
+
 @protocol YZWebViewDelegate <NSObject>
 
 @optional
 - (BOOL)webView:(id<YZWebView>)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType;
+
+/**
+ 容器级页面跳转白名单拦截回调。
+ 当目标 URL 命中通过 setNavigationInterceptionURLRules: 注册的白名单规则时触发。
+ 仅在所有原有拦截逻辑放行后、且命中白名单时才回调；SDK 不继续执行默认跳转。
+ */
+- (void)webView:(id<YZWebView>)webView didInterceptNavigationWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType;
+
 - (void)webViewDidStartLoad:(id<YZWebView>)webView;
 - (void)webViewDidFinishLoad:(id<YZWebView>)webView;
 - (void)webView:(id<YZWebView>)webView didFailLoadWithError:(NSError *)error;
@@ -57,6 +67,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL scalesPageToFit;
 
 @property (nonatomic, readonly) double estimatedProgress;
+
+/**
+ 设置页面跳转白名单拦截规则。
+ 每条规则包含 URL 字符串与匹配类型（精确 / 前缀），由业务方显式指定。
+ 传入 nil 或空数组时清空规则，不拦截任何跳转。
+ @param rules YZInterceptionRule 规则数组
+ */
+- (void)setNavigationInterceptionRules:(nullable NSArray<YZInterceptionRule *> *)rules;
+
+/**
+ 容器级 loading 开关。
+ - 显式赋值 NO（默认）：遵从 YZConfig.disableDefaultLoading 全局配置。
+ - 显式赋值 YES：该容器关闭 SDK loading，不论全局配置。
+ */
+@property (nonatomic, assign) BOOL disableLoading;
 
 - (void)loadRequest:(NSURLRequest *)request;
 - (void)loadHTMLString:(NSString *)string baseURL:(nullable NSURL *)baseURL;

@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		zGSumpw6JfMjearFeYBJmof55Eg=
+		e9TDS/zbnVCZZECX0ShvnwecxbQ=
 		</data>
 		<key>Headers/YZBaseSDK.h</key>
 		<data>
-		EkhurW1xO3Qra28gxTAbYV1wGWQ=
+		Y3yeIBdLqb3D6+Sx8G3n6PdLeLU=
 		</data>
 		<key>Headers/YZConfig.h</key>
 		<data>
@@ -19,6 +19,10 @@
 		<key>Headers/YZIMWebViewController.h</key>
 		<data>
 		gpjq/jmI+JOI8ovGiHkBCX1wciA=
+		</data>
+		<key>Headers/YZInterceptionRule.h</key>
+		<data>
+		PB2eOOS59Qx9jLhOYszydMPROeg=
 		</data>
 		<key>Headers/YZNotice.h</key>
 		<data>
@@ -38,11 +42,11 @@
 		</data>
 		<key>Headers/YZWebViewProtocol.h</key>
 		<data>
-		FJ3GyxQR5tOhz3En+dLSelUNtr4=
+		dbRW40nbjkAEaBXovosNptYaSyg=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		WlEg0TdazQbeg8+HDYw5ry9m+Aw=
+		Vh/KZO10GqbXN53ekv3Cn1vtdzg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -55,14 +59,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RAVjRW3wl7ik2hqvFGNfigGsljL6wWBRJMJgwVIHAqc=
+			7hLLdedzXdTz9kxMLyvC3IGT816BjLB1EX/3AOtyZqM=
 			</data>
 		</dict>
 		<key>Headers/YZBaseSDK.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			42gqjJk2+XPFgHJ1lScIeVtTju1rxt09f+CWtuPEtjE=
+			n8kNYRzcTdkXi6/r2HDPUTK1Nshbb0bBChl/AFi4kpE=
 			</data>
 		</dict>
 		<key>Headers/YZConfig.h</key>
@@ -77,6 +81,13 @@
 			<key>hash2</key>
 			<data>
 			/7YkugSXtJ51//SQrPla2tc1zxVvbeYOOZpqHop99FU=
+			</data>
+		</dict>
+		<key>Headers/YZInterceptionRule.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PMVxlShcIDW5EkYRDGb3EfBYCuN/beuq9NP58gjUnZA=
 			</data>
 		</dict>
 		<key>Headers/YZNotice.h</key>
@@ -111,7 +122,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uJuD9uXUSHCaTYWY5BOtuQ9XKt9aOtHcB6Hjvh8Uls0=
+			hDiWoA+YUbUqSEEg5kU4v1ZLok8FBcO9udW2ZZIhdm4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

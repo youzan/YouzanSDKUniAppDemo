@@ -2,7 +2,7 @@
     "name": "YouzanUniPlugin",
     "id": "YouzanUniPlugin",
     "version": "1.0.0",
-    "description": "有赞SDK插件",
+    "description": "有赞开店SDK插件",
     "_dp_type": "nativeplugin",
     "_dp_nativeplugin": {
         "ios": {
